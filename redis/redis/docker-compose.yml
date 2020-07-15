@@ -1,0 +1,22 @@
+version: '2'
+services:
+  master:
+    image: redis
+    container_name: redis-master
+    ports:
+      - 6380:6379
+    command: redis-server --requirepass pluto1002  --masterauth pluto1002
+
+  slave1:
+    image: redis
+    container_name: redis-slave-1
+    ports:
+      - 6381:6379
+    command: redis-server --slaveof redis-master 6379 --requirepass pluto1002 --masterauth pluto1002
+
+  slave2:
+    image: redis
+    container_name: redis-slave-2
+    ports:
+      - 6382:6379
+    command: redis-server --slaveof redis-master 6379 --requirepass pluto1002 --masterauth pluto1002
